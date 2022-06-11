@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express') 
 const app = express()
 const cors = require('cors')
 const PORT = 8000
@@ -69,11 +69,13 @@ const boondocks = {
     
     
     }
-   
+app.use(express.static(__dirname +'/public/'));
 app.get('/', (request,response) => {
 response.sendFile(__dirname + '/index.html')
 })
-
+app.get('/public/js/main.js', (request, response)=>{
+    response.sendFile(__dirname + '/public/js/main.js')
+  })
 app.get('/api/:characterName',(request,response) => {
     const characterName = request.params.characterName.toLowerCase()
     if(boondocks[characterName]){
@@ -83,7 +85,8 @@ app.get('/api/:characterName',(request,response) => {
 }
 
 })
+
 app.listen(process.env.PORT || PORT, () => {
-    console.log('Server is running!')
+    console.log(`Server is running on  ${PORT}!`)
 
 })
