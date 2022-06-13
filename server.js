@@ -74,13 +74,25 @@ const boondocks = {
 app.get('/', (request,response) => {
 response.sendFile(__dirname + '/index.html')
 })
+app.get('/public/JS/index.js', (request, response)=>{
+    response.sendFile(__dirname + '/public/JS/index.js')
+  })
+//app.get('/api/:characterName',(request,response) => {//
+   // const characterName = request.params.characterName.toLowerCase()//
+    //if(boondocks[characterName]){//
+   // response.json(boondocks[characterName])//
+//} else{
+   // response.json(boondocks['unavailable'])//
+//}
+
+//})//
 
 app.get('/api/:characterName',(request,response) => {
-    const characterName = request.params.characterName.toLowerCase()
-    if(boondocks[characterName]){
-    response.json(boondocks[characterName])
+    const charactersName = request.params.characterName.toLowerCase()
+    if(characterName[charactersName]){
+    response.json(characterName[charactersName])
 } else{
-    response.json(boondocks['unavailable'])
+    response.json(['unavailable'])
 }
 
 })
@@ -88,3 +100,4 @@ app.listen(process.env.PORT || PORT, () => {
     console.log('Server is running!')
 
 })
+
